@@ -30,6 +30,22 @@ const Experience = () => {
           <div><small>Worked as an intern for 3 Month </small></div>
           </article>
          
+         <article className='xp__card'>
+         <h4><strong>Freelance Projects</strong></h4>
+         <small>3 Month</small>
+         <div><small>Worked as an intern for 3 Month </small></div>
+         </article>
+
+         
+         
+         <article className='xp__card'>
+          <h4><strong>Freelance Projects</strong></h4>
+          <small>3 Month</small>
+          <div><small>Worked as an intern for 3 Month </small></div>
+          </article>
+
+          
+         
           <article className='xp__card'>
           <h4><strong>Freelance Projects</strong></h4>
           <small>3 Month</small>
