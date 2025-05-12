@@ -7,7 +7,7 @@ import ME from './banner.png'
 
 const Header = () => {
   return (
-    <header>
+    <header id="header">
       <div className="container header__container">
         
         <h5 style={{margin:0}}>Hello I'm </h5>

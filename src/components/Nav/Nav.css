@@ -11,6 +11,12 @@
   border-radius: var(--radius-full);
   padding: 0.5rem;
   box-shadow: var(--shadow-lg);
+  transition: var(--transition-normal);
+}
+
+.nav__container:hover {
+  background: rgba(10, 10, 10, 0.9);
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
 }
 
 .nav__menu {
@@ -72,10 +78,24 @@
   color: var(--light-text);
   background: var(--gradient-primary);
   box-shadow: var(--shadow-glow);
+  transform: translateY(-3px) scale(1.1);
 }
 
 .nav__link.active::before {
   background: var(--gradient-accent);
+}
+
+.nav__link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  box-shadow: var(--shadow-glow);
 }
 
 /* Mobile Navigation */
@@ -147,5 +167,9 @@
 
   .nav__link:hover {
     transform: translateX(10px);
+  }
+
+  .nav__link.active {
+    transform: translateX(10px) scale(1.05);
   }
 }

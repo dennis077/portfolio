@@ -1,0 +1,189 @@
+.scroll-motion {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+}
+
+.scroll-motion.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fade Up Animation */
+.scroll-motion.fade-up {
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-motion.fade-up.animate {
+  transform: translateY(0);
+}
+
+/* Fade Down Animation */
+.scroll-motion.fade-down {
+  transform: translateY(-30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-motion.fade-down.animate {
+  transform: translateY(0);
+}
+
+/* Fade Left Animation */
+.scroll-motion.fade-left {
+  transform: translateX(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-motion.fade-left.animate {
+  transform: translateX(0);
+}
+
+/* Fade Right Animation */
+.scroll-motion.fade-right {
+  transform: translateX(-30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-motion.fade-right.animate {
+  transform: translateX(0);
+}
+
+/* Scale Up Animation */
+.scroll-motion.scale-up {
+  transform: scale(0.9);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-motion.scale-up.animate {
+  transform: scale(1);
+}
+
+/* Scale Down Animation */
+.scroll-motion.scale-down {
+  transform: scale(1.1);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-motion.scale-down.animate {
+  transform: scale(1);
+}
+
+/* Rotate Animation */
+.scroll-motion.rotate {
+  transform: rotate(-5deg);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-motion.rotate.animate {
+  transform: rotate(0);
+}
+
+/* Flip Animation */
+.scroll-motion.flip {
+  transform: perspective(1000px) rotateX(60deg);
+  transform-origin: center top;
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-motion.flip.animate {
+  transform: perspective(1000px) rotateX(0);
+}
+
+/* Slide Up Animation */
+.scroll-motion.slide-up {
+  transform: translateY(50px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-motion.slide-up.animate {
+  transform: translateY(0);
+}
+
+/* Slide Down Animation */
+.scroll-motion.slide-down {
+  transform: translateY(-50px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-motion.slide-down.animate {
+  transform: translateY(0);
+}
+
+/* Slide Left Animation */
+.scroll-motion.slide-left {
+  transform: translateX(50px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-motion.slide-left.animate {
+  transform: translateX(0);
+}
+
+/* Slide Right Animation */
+.scroll-motion.slide-right {
+  transform: translateX(-50px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-motion.slide-right.animate {
+  transform: translateX(0);
+}
+
+/* Bounce Animation */
+.scroll-motion.bounce {
+  transform: scale(0.8);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-motion.bounce.animate {
+  animation: gentleBounce 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes gentleBounce {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  30% {
+    transform: translateY(-15px) scale(1.05);
+  }
+  60% {
+    transform: translateY(-5px) scale(0.95);
+  }
+}
+
+/* Stagger Children */
+.scroll-motion.stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.scroll-motion.stagger.animate > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-motion.stagger.animate > *:nth-child(1) { transition-delay: 0.1s; }
+.scroll-motion.stagger.animate > *:nth-child(2) { transition-delay: 0.2s; }
+.scroll-motion.stagger.animate > *:nth-child(3) { transition-delay: 0.3s; }
+.scroll-motion.stagger.animate > *:nth-child(4) { transition-delay: 0.4s; }
+.scroll-motion.stagger.animate > *:nth-child(5) { transition-delay: 0.5s; }
+.scroll-motion.stagger.animate > *:nth-child(6) { transition-delay: 0.6s; }
+.scroll-motion.stagger.animate > *:nth-child(7) { transition-delay: 0.7s; }
+.scroll-motion.stagger.animate > *:nth-child(8) { transition-delay: 0.8s; }
+.scroll-motion.stagger.animate > *:nth-child(9) { transition-delay: 0.9s; }
+.scroll-motion.stagger.animate > *:nth-child(10) { transition-delay: 1s; }
+
+/* Add subtle hover effect to all animated elements */
+.scroll-motion.animate:hover {
+  transform: translateY(-2px);
+  transition: transform 0.3s ease;
+} 

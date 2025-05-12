@@ -10,6 +10,7 @@ import Services from './components/Services/Services'
 import Achievemets from './components/Achievemets/Achievemets'
 import Contact from './components/Contact/Contact'
 import Decorations from './components/Decorations/Decorations'
+import ScrollMotion from './components/ScrollMotion/ScrollMotion'
 
 function App() {
   return (
@@ -17,13 +18,27 @@ function App() {
         <Decorations />
         <Header />
         <Nav />
-        <About />
-        <Experience />
-        <Portfolio />
-        <Skills />
-        <Services />
-        <Achievemets />
-        <Contact />
+        <ScrollMotion animation="fade-up">
+          <About />
+        </ScrollMotion>
+        <ScrollMotion animation="fade-up" delay={0.2}>
+          <Experience />
+        </ScrollMotion>
+        <ScrollMotion animation="fade-up" delay={0.4}>
+          <Portfolio />
+        </ScrollMotion>
+        <ScrollMotion animation="fade-up" delay={0.6}>
+          <Skills />
+        </ScrollMotion>
+        <ScrollMotion animation="fade-up" delay={0.8}>
+          <Services />
+        </ScrollMotion>
+        <ScrollMotion animation="fade-up" delay={1}>
+          <Achievemets />
+        </ScrollMotion>
+        <ScrollMotion animation="fade-up" delay={1.2}>
+          <Contact />
+        </ScrollMotion>
     </div>
   );
 }
