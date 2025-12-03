@@ -2,6 +2,15 @@ import React, { useState, useRef, useMemo, memo } from 'react';
 import './portfolio.css';
 import ProjectModal from './ProjectModal';
 import project1Image from './project1.png';
+import papscoImage from './papsco.png';
+import dhiNutriImage from './dhinutri.png';
+import myportfolioImage from './myportfolio.png';
+import shaktifyImage from './shaktify.png';
+import whatsLiveImage from './whatslive.png';
+// import namoNaicoImage from './namonaico.png';
+// import goDaddyImage from './godaddy.png';
+// import newfoldImage from './newfold.png';
+// import reFuelImage from './refuel.png';
 import { BsSearch, BsGrid3X3Gap, BsList, BsX } from 'react-icons/bs';
 import { useRAFThrottle } from '../../hooks/useThrottle';
 
@@ -60,7 +69,7 @@ const projects = [
     description: 'Personal portfolio website built with React, featuring modern animations using GSAP, custom cursor interactions, and a fully responsive design. Showcases projects, skills, and professional experience with smooth transitions and interactive elements.',
     technologies: ['React', 'HTML5', 'CSS3', 'JavaScript', 'GSAP', 'Cursor API'],
     images: [
-      'https://via.placeholder.com/800x450',
+      myportfolioImage,
       'https://via.placeholder.com/800x450',
       'https://via.placeholder.com/800x450'
     ],
@@ -72,7 +81,7 @@ const projects = [
     description: 'Professional WordPress website for DhiNutri, featuring custom design, responsive layout, and optimized performance. Built with modern WordPress practices, custom themes, and seamless user experience.',
     technologies: ['WordPress', 'HTML5', 'CSS3', 'PHP', 'MySQL', 'JavaScript'],
     images: [
-      'https://via.placeholder.com/800x450',
+      dhiNutriImage,
       'https://via.placeholder.com/800x450',
       'https://via.placeholder.com/800x450'
     ],
@@ -84,7 +93,7 @@ const projects = [
     description: 'WordPress website for Shaktify, designed with custom themes and plugins. Features responsive design, modern UI/UX, and optimized performance for seamless user experience across all devices.',
     technologies: ['WordPress', 'HTML5', 'CSS3', 'PHP', 'MySQL', 'JavaScript'],
     images: [
-      'https://via.placeholder.com/800x450',
+      shaktifyImage,
       'https://via.placeholder.com/800x450',
       'https://via.placeholder.com/800x450'
     ],
@@ -96,7 +105,7 @@ const projects = [
     description: 'WordPress website for Namo Naico, featuring custom design elements, responsive layout, and modern functionality. Built with best practices in WordPress development for optimal performance and user experience.',
     technologies: ['WordPress', 'HTML5', 'CSS3', 'PHP', 'MySQL', 'JavaScript'],
     images: [
-      'https://via.placeholder.com/800x450',
+      papscoImage,
       'https://via.placeholder.com/800x450',
       'https://via.placeholder.com/800x450'
     ],
@@ -169,6 +178,18 @@ const projects = [
     technologies: ['ASP.net', 'Bootstrap', 'MySQL', 'JavaScript'],
     images: [
       'https://via.placeholder.com/800x450',
+      'https://via.placeholder.com/800x450',
+      'https://via.placeholder.com/800x450'
+    ],
+    link: '#'
+  },
+  {
+    id: 15,
+    title: 'WhatsLive',
+    description: 'Developed a Company Landing Page application using wordpress that allows users to chat with live agents in real-time. Features include live chat, message history, and automated responses. ',
+    technologies: ['Node.js', 'Bootstrap', 'MySQL', 'JavaScript'],
+    images: [
+      whatsLiveImage,
       'https://via.placeholder.com/800x450',
       'https://via.placeholder.com/800x450'
     ],
