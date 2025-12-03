@@ -1,13 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import './portfolio.css';
 import ProjectModal from './ProjectModal';
+import project1Image from './project1.png';
+import { BsSearch, BsGrid3X3Gap, BsList, BsX } from 'react-icons/bs';
 
 const projects = [
   {
     id: 1,
-    title: 'GoDaddy Projects',
-    description: 'Designed and developed multiple websites for GoDaddy clients, focusing on creating modern, responsive, and user-friendly interfaces. Implemented custom WordPress themes and plugins to meet specific client requirements.',
-    technologies: ['WordPress', 'HTML5', 'CSS3', 'JavaScript', 'PHP', 'MySQL'],
+    title: 'ProtoTech Solutions Website',
+    description: 'Main website for ProtoTech Solutions designed and developed in WordPress. Features custom themes, responsive design, and seamless user experience with HTML, CSS, PHP, and MySQL integration.',
+    technologies: ['WordPress', 'HTML5', 'CSS3', 'PHP', 'MySQL', 'JavaScript'],
+    images: [
+      project1Image,
+      'https://via.placeholder.com/800x450',
+      'https://via.placeholder.com/800x450'
+    ],
+    link: '#'
+  },
+  {
+    id: 2,
+    title: '3D Measure Up',
+    description: 'ProtoTech Solutions\'s 3D Measure Up website designed and developed in WordPress. A specialized platform featuring custom functionality, responsive design, and optimized performance using HTML, CSS, PHP, and MySQL.',
+    technologies: ['WordPress', 'HTML5', 'CSS3', 'PHP', 'MySQL', 'JavaScript'],
     images: [
       'https://via.placeholder.com/800x450',
       'https://via.placeholder.com/800x450',
@@ -16,7 +30,103 @@ const projects = [
     link: '#'
   },
   {
-    id: 2,
+    id: 3,
+    title: 'Photo to Size',
+    description: 'ProtoTech Solutions\'s 3D Photo to Size website designed and developed in WordPress. Custom-built solution with advanced features, responsive layout, and seamless integration using HTML, CSS, PHP, and MySQL.',
+    technologies: ['WordPress', 'HTML5', 'CSS3', 'PHP', 'MySQL', 'JavaScript'],
+    images: [
+      'https://via.placeholder.com/800x450',
+      'https://via.placeholder.com/800x450',
+      'https://via.placeholder.com/800x450'
+    ],
+    link: '#'
+  },
+  {
+    id: 4,
+    title: 'FormTrack Dashboard',
+    description: 'Custom dashboard application synchronized with Google Sheets for dynamic form entry tracking and follow-up automation. Features real-time data synchronization, automated workflows, and comprehensive analytics.',
+    technologies: ['HTML5', 'CSS3', 'JavaScript', 'PHP', 'MySQL', 'Google Sheets API'],
+    images: [
+      'https://via.placeholder.com/800x450',
+      'https://via.placeholder.com/800x450',
+      'https://via.placeholder.com/800x450'
+    ],
+    link: '#'
+  },
+  {
+    id: 5,
+    title: 'My Portfolio',
+    description: 'Personal portfolio website built with React, featuring modern animations using GSAP, custom cursor interactions, and a fully responsive design. Showcases projects, skills, and professional experience with smooth transitions and interactive elements.',
+    technologies: ['React', 'HTML5', 'CSS3', 'JavaScript', 'GSAP', 'Cursor API'],
+    images: [
+      'https://via.placeholder.com/800x450',
+      'https://via.placeholder.com/800x450',
+      'https://via.placeholder.com/800x450'
+    ],
+    link: '#'
+  },
+  {
+    id: 6,
+    title: 'DhiNutri',
+    description: 'Professional WordPress website for DhiNutri, featuring custom design, responsive layout, and optimized performance. Built with modern WordPress practices, custom themes, and seamless user experience.',
+    technologies: ['WordPress', 'HTML5', 'CSS3', 'PHP', 'MySQL', 'JavaScript'],
+    images: [
+      'https://via.placeholder.com/800x450',
+      'https://via.placeholder.com/800x450',
+      'https://via.placeholder.com/800x450'
+    ],
+    link: '#'
+  },
+  {
+    id: 7,
+    title: 'Shaktify',
+    description: 'WordPress website for Shaktify, designed with custom themes and plugins. Features responsive design, modern UI/UX, and optimized performance for seamless user experience across all devices.',
+    technologies: ['WordPress', 'HTML5', 'CSS3', 'PHP', 'MySQL', 'JavaScript'],
+    images: [
+      'https://via.placeholder.com/800x450',
+      'https://via.placeholder.com/800x450',
+      'https://via.placeholder.com/800x450'
+    ],
+    link: '#'
+  },
+  {
+    id: 8,
+    title: 'Namo Naico',
+    description: 'WordPress website for Namo Naico, featuring custom design elements, responsive layout, and modern functionality. Built with best practices in WordPress development for optimal performance and user experience.',
+    technologies: ['WordPress', 'HTML5', 'CSS3', 'PHP', 'MySQL', 'JavaScript'],
+    images: [
+      'https://via.placeholder.com/800x450',
+      'https://via.placeholder.com/800x450',
+      'https://via.placeholder.com/800x450'
+    ],
+    link: '#'
+  },
+  {
+    id: 9,
+    title: 'GoDaddy Projects',
+    description: 'Designed and developed multiple websites for GoDaddy clients, focusing on creating modern, responsive, and user-friendly interfaces. Implemented custom WordPress themes and plugins to meet specific client requirements.',
+    technologies: ['WordPress', 'HTML5', 'CSS3', 'JavaScript', 'PHP', 'MySQL'],
+    images: [
+      project1Image,
+      'https://via.placeholder.com/800x450',
+      'https://via.placeholder.com/800x450'
+    ],
+    link: '#'
+  },
+  {
+    id: 10,
+    title: 'Newfold Projects',
+    description: 'Multiple WordPress projects developed for Newfold Digital clients. Custom themes, responsive designs, and optimized performance. Focused on delivering high-quality websites that meet client specifications and industry standards.',
+    technologies: ['WordPress', 'HTML5', 'CSS3', 'PHP', 'MySQL', 'JavaScript'],
+    images: [
+      'https://via.placeholder.com/800x450',
+      'https://via.placeholder.com/800x450',
+      'https://via.placeholder.com/800x450'
+    ],
+    link: '#'
+  },
+  {
+    id: 11,
     title: 'Project Re-Fuel',
     description: 'Developed an ASP.net based service platform for petrol pump queue management. The system helps optimize fuel station operations by managing vehicle queues and reducing waiting times.',
     technologies: ['ASP.net', 'Materialize CSS', 'C#', 'SQL Server'],
@@ -28,7 +138,7 @@ const projects = [
     link: '#'
   },
   {
-    id: 3,
+    id: 12,
     title: 'Project Lockdown',
     description: 'Created a COVID-19 emergency access management system to help organizations manage and monitor access during the pandemic. Features include contact tracing, health status tracking, and automated notifications.',
     technologies: ['ASP.net', 'Materialize CSS', 'C#', 'Azure'],
@@ -40,7 +150,7 @@ const projects = [
     link: '#'
   },
   {
-    id: 4,
+    id: 13,
     title: 'E-Learning4BCA',
     description: 'Built an online learning platform specifically designed for BCA students. The platform includes course materials, video lectures, practice tests, and a discussion forum for student interaction.',
     technologies: ['PHP', 'Bootstrap', 'MySQL', 'JavaScript'],
@@ -52,7 +162,7 @@ const projects = [
     link: '#'
   },
   {
-    id: 5,
+    id: 14,
     title: 'Jobwaala',
     description: 'Developed a comprehensive job portal that connects candidates with recruiters. Features include job posting, resume management, candidate search, and automated matching algorithms.',
     technologies: ['ASP.net', 'Bootstrap', 'MySQL', 'JavaScript'],
@@ -66,15 +176,61 @@ const projects = [
 ];
 
 function Portfolio() {
-  const [currentSlide, setCurrentSlide] = useState(0);
   const [selectedProject, setSelectedProject] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeFilter, setActiveFilter] = useState('All');
+  const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'compact'
+  const cardRefs = useRef({});
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev === projects.length - 1 ? 0 : prev + 1));
+  // Extract unique technologies for filter buttons
+  const allTechnologies = useMemo(() => {
+    const techSet = new Set();
+    projects.forEach(project => {
+      project.technologies.forEach(tech => techSet.add(tech));
+    });
+    return ['All', ...Array.from(techSet).sort()];
+  }, []);
+
+  // Filter and search projects
+  const filteredProjects = useMemo(() => {
+    return projects.filter(project => {
+      const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                           project.description.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesFilter = activeFilter === 'All' || 
+                           project.technologies.includes(activeFilter);
+      return matchesSearch && matchesFilter;
+    });
+  }, [searchQuery, activeFilter]);
+
+  const handleMouseMove = (e, projectId) => {
+    const card = cardRefs.current[projectId];
+    if (!card) return;
+    
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    // Calculate rotation with smoother, more subtle effect
+    const rotateX = ((y - centerY) / centerY) * -8; // Max 8 degrees
+    const rotateY = ((x - centerX) / centerX) * 8; // Max 8 degrees
+    
+    // Calculate scale and translateZ for depth
+    const distanceX = Math.abs(x - centerX) / centerX;
+    const distanceY = Math.abs(y - centerY) / centerY;
+    const distance = Math.max(distanceX, distanceY);
+    const translateZ = 30 + (distance * 20); // 30-50px depth
+    const scale = 1 + (distance * 0.02); // 1.0-1.02 scale
+    
+    card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`;
   };
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev === 0 ? projects.length - 1 : prev - 1));
+  const handleMouseLeave = (projectId) => {
+    const card = cardRefs.current[projectId];
+    if (card) {
+      card.style.transform = 'perspective(1200px) rotateX(0) rotateY(0) translateZ(0) scale(1)';
+    }
   };
 
   const openModal = (project) => {
@@ -88,42 +244,150 @@ function Portfolio() {
   return (
     <section id="portfolio" className="portfolio-section">
       <h2 className="section-title">My Projects</h2>
-      <div className="portfolio-container">
-        <div className="glass-card project-slider">
-          <div className="slider-content">
-            <div className="project-image">
-              <img src={projects[currentSlide].images[0]} alt={projects[currentSlide].title} />
-            </div>
-            <div className="project-info">
-              <h3>{projects[currentSlide].title}</h3>
-              <p>{projects[currentSlide].description}</p>
-              <div className="technologies">
-                {projects[currentSlide].technologies.map((tech, index) => (
-                  <span key={index} className="tech-tag">{tech}</span>
-                ))}
-              </div>
-              <button 
-                className="project-link"
-                onClick={() => openModal(projects[currentSlide])}
-              >
-                View Project
-              </button>
-            </div>
-          </div>
-          <div className="slider-controls">
-            <button onClick={prevSlide} className="slider-btn">❮</button>
-            <div className="slider-dots">
-              {projects.map((_, index) => (
-                <span
-                  key={index}
-                  className={`dot ${currentSlide === index ? 'active' : ''}`}
-                  onClick={() => setCurrentSlide(index)}
-                />
-              ))}
-            </div>
-            <button onClick={nextSlide} className="slider-btn">❯</button>
-          </div>
+      
+      {/* Search and Filter Controls */}
+      <div className="portfolio-controls">
+        <div className="search-container">
+          <BsSearch className="search-icon" />
+          <input
+            type="text"
+            placeholder="Search projects..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="search-input"
+          />
+          {searchQuery && (
+            <button 
+              className="clear-search"
+              onClick={() => setSearchQuery('')}
+              aria-label="Clear search"
+            >
+              <BsX />
+            </button>
+          )}
         </div>
+
+        <div className="view-toggle">
+          <button
+            className={`view-btn ${viewMode === 'grid' ? 'active' : ''}`}
+            onClick={() => setViewMode('grid')}
+            aria-label="Grid view"
+          >
+            <BsGrid3X3Gap />
+          </button>
+          <button
+            className={`view-btn ${viewMode === 'compact' ? 'active' : ''}`}
+            onClick={() => setViewMode('compact')}
+            aria-label="Compact view"
+          >
+            <BsList />
+          </button>
+        </div>
+      </div>
+
+      {/* Filter Tags */}
+      <div className="filter-tags">
+        {allTechnologies.slice(0, 8).map((tech) => (
+          <button
+            key={tech}
+            className={`filter-tag ${activeFilter === tech ? 'active' : ''}`}
+            onClick={() => setActiveFilter(tech)}
+          >
+            {tech}
+          </button>
+        ))}
+        {allTechnologies.length > 8 && (
+          <button
+            className={`filter-tag ${activeFilter === 'More' ? 'active' : ''}`}
+            onClick={() => {
+              if (activeFilter === 'More') {
+                setActiveFilter('All');
+              } else {
+                // Show dropdown or expand
+                setActiveFilter('More');
+              }
+            }}
+          >
+            More...
+          </button>
+        )}
+      </div>
+
+      {/* Results Count */}
+      <div className="results-count">
+        Showing <strong>{filteredProjects.length}</strong> of <strong>{projects.length}</strong> projects
+      </div>
+
+      <div className="portfolio-container">
+        {filteredProjects.length > 0 ? (
+          <div className={`projects-3d-grid ${viewMode === 'compact' ? 'compact-view' : ''}`}>
+            {filteredProjects.map((project, index) => (
+            <div
+              key={project.id}
+              ref={(el) => (cardRefs.current[project.id] = el)}
+              className="project-card-3d"
+              style={{ '--index': index }}
+              onMouseMove={(e) => handleMouseMove(e, project.id)}
+              onMouseLeave={() => handleMouseLeave(project.id)}
+              onClick={() => openModal(project)}
+            >
+              <div className="card-3d-inner">
+                <div className="card-3d-front">
+                  <div className="project-image-3d">
+                    <img src={project.images[0]} alt={project.title} />
+                    <div className="image-overlay"></div>
+                  </div>
+                  <div className="project-content-3d">
+                    <h3>{project.title}</h3>
+                    <p>{project.description.substring(0, 100)}...</p>
+                    <div className="technologies-3d">
+                      {project.technologies.slice(0, 3).map((tech, techIndex) => (
+                        <span key={techIndex} className="tech-tag-3d">{tech}</span>
+                      ))}
+                      {project.technologies.length > 3 && (
+                        <span className="tech-tag-3d">+{project.technologies.length - 3}</span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+                <div className="card-3d-back">
+                  <div className="card-back-content">
+                    <h3>{project.title}</h3>
+                    <p className="back-description">{project.description}</p>
+                    <div className="all-technologies">
+                      {project.technologies.map((tech, techIndex) => (
+                        <span key={techIndex} className="tech-tag-3d">{tech}</span>
+                      ))}
+                    </div>
+                    <button 
+                      className="view-project-btn"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openModal(project);
+                      }}
+                    >
+                      View Details
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+          </div>
+        ) : (
+          <div className="no-results">
+            <p>No projects found matching your search criteria.</p>
+            <button 
+              className="clear-filters-btn"
+              onClick={() => {
+                setSearchQuery('');
+                setActiveFilter('All');
+              }}
+            >
+              Clear Filters
+            </button>
+          </div>
+        )}
       </div>
 
       {selectedProject && (

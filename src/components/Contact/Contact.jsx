@@ -76,7 +76,8 @@ const Contact = () => {
             className="submit-button"
             onClick={() => setShowThankYou(false)}
           >
-            Send Another Message
+            <FaPaperPlane />
+            <span>Send Another Message</span>
           </button>
         </div>
       </div>
@@ -190,8 +191,8 @@ const Contact = () => {
                 className="submit-button"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? 'Sending...' : 'Send Message'}
                 <FaPaperPlane className="send-icon" />
+                <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
               </button>
             </form>
           </div>

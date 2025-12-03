@@ -1,32 +1,37 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback, memo } from 'react';
 import './scrollMotion.css';
 
-const ScrollMotion = ({ children, animation = 'fade-up', delay = 0 }) => {
+const ScrollMotion = memo(({ children, animation = 'fade-up', delay = 0 }) => {
   const elementRef = useRef(null);
   const observerRef = useRef(null);
 
   const observerCallback = useCallback((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('animate');
-        observerRef.current.unobserve(entry.target);
+        setTimeout(() => {
+          entry.target.classList.add('animate');
+        }, 100);
+        observerRef.current?.unobserve(entry.target);
       }
     });
   }, []);
 
   useEffect(() => {
-    observerRef.current = new IntersectionObserver(observerCallback, {
+    const options = {
       threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    });
+      rootMargin: '50px 0px'
+    };
 
-    if (elementRef.current) {
-      observerRef.current.observe(elementRef.current);
+    observerRef.current = new IntersectionObserver(observerCallback, options);
+
+    const currentElement = elementRef.current;
+    if (currentElement) {
+      observerRef.current.observe(currentElement);
     }
 
     return () => {
-      if (elementRef.current && observerRef.current) {
-        observerRef.current.unobserve(elementRef.current);
+      if (currentElement && observerRef.current) {
+        observerRef.current.unobserve(currentElement);
       }
     };
   }, [observerCallback]);
@@ -35,11 +40,16 @@ const ScrollMotion = ({ children, animation = 'fade-up', delay = 0 }) => {
     <div 
       ref={elementRef} 
       className={`scroll-motion ${animation}`}
-      style={{ animationDelay: `${delay}s` }}
+      style={{ 
+        animationDelay: `${delay}s`,
+        willChange: 'transform, opacity'
+      }}
     >
       {children}
     </div>
   );
-};
+});
+
+ScrollMotion.displayName = 'ScrollMotion';
 
 export default ScrollMotion; 

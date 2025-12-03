@@ -39,26 +39,15 @@ const Nav = () => {
       const visibleHeight = Math.max(0, visibleBottom - visibleTop);
       const visibility = visibleHeight / sectionHeight;
 
-      // Debug logs for Experience and Portfolio sections
-      if (section.id === 'experience' || section.id === 'portfolio') {
-        console.log(`Section: ${section.id}`);
-        console.log(`Section Top: ${sectionTop}`);
-        console.log(`Section Bottom: ${sectionBottom}`);
-        console.log(`Scroll Position: ${scrollPosition}`);
-        console.log(`Visibility: ${visibility}`);
-        console.log('-------------------');
-      }
+            if (visibility > maxVisibility) {
+              maxVisibility = visibility;
+              currentSection = section;
+            }
+          });
 
-      if (visibility > maxVisibility) {
-        maxVisibility = visibility;
-        currentSection = section;
-      }
-    });
-
-    if (currentSection && maxVisibility > 0.3) { // Only update if section is at least 30% visible
-      console.log(`Active Section: ${currentSection.id}, Visibility: ${maxVisibility}`);
-      setActiveSection(currentSection.id);
-    }
+          if (currentSection && maxVisibility > 0.3) { // Only update if section is at least 30% visible
+            setActiveSection(currentSection.id);
+          }
   }, []);
 
   useEffect(() => {

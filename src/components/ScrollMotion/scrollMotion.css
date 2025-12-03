@@ -1,23 +1,41 @@
 .scroll-motion {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform, opacity;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  perspective: 1000px;
-  -webkit-perspective: 1000px;
+  opacity: 1;
+  transform: none;
+  transition: transform 0.3s ease-out;
 }
 
 .scroll-motion.animate {
-  opacity: 1;
-  transform: translateY(0);
+  transform: none;
+}
+
+/* Basic animation types */
+.scroll-motion.fade-up {
+  transform: translateY(20px);
+}
+
+.scroll-motion.fade-down {
+  transform: translateY(-20px);
+}
+
+.scroll-motion.fade-left {
+  transform: translateX(20px);
+}
+
+.scroll-motion.fade-right {
+  transform: translateX(-20px);
+}
+
+/* Mobile optimization */
+@media screen and (max-width: 768px) {
+  .scroll-motion {
+    transform: none;
+  }
 }
 
 /* Fade Up Animation */
 .scroll-motion.fade-up {
-  transform: translateY(30px);
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(20px);
+  transition: transform 0.3s ease-out;
 }
 
 .scroll-motion.fade-up.animate {
@@ -26,8 +44,8 @@
 
 /* Fade Down Animation */
 .scroll-motion.fade-down {
-  transform: translateY(-30px);
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(-20px);
+  transition: transform 0.3s ease-out;
 }
 
 .scroll-motion.fade-down.animate {
@@ -36,8 +54,8 @@
 
 /* Fade Left Animation */
 .scroll-motion.fade-left {
-  transform: translateX(30px);
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(20px);
+  transition: transform 0.3s ease-out;
 }
 
 .scroll-motion.fade-left.animate {
@@ -46,8 +64,8 @@
 
 /* Fade Right Animation */
 .scroll-motion.fade-right {
-  transform: translateX(-30px);
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-20px);
+  transition: transform 0.3s ease-out;
 }
 
 .scroll-motion.fade-right.animate {
@@ -159,16 +177,13 @@
 
 /* Stagger Children */
 .scroll-motion.stagger > * {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+  opacity: 1;
+  transform: none;
+  transition: transform 0.3s ease-out;
 }
 
 .scroll-motion.stagger.animate > * {
-  opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 
 .scroll-motion.stagger.animate > *:nth-child(1) { transition-delay: 0.1s; }

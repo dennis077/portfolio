@@ -7,7 +7,7 @@ import Experience from './components/Experience/Experience'
 import Portfolio from './components/Portfolio/Portfolio'
 import Skills from './components/Skills/Skills'
 import Services from './components/Services/Services'
-import Achievemets from './components/Achievemets/Achievemets'
+import Achievements from './components/Achievemets/Achievemets'
 import Contact from './components/Contact/Contact'
 import Decorations from './components/Decorations/Decorations'
 import ScrollMotion from './components/ScrollMotion/ScrollMotion'
@@ -34,7 +34,7 @@ function App() {
           <Services />
         </ScrollMotion>
         <ScrollMotion animation="fade-up" delay={1}>
-          <Achievemets />
+          <Achievements />
         </ScrollMotion>
         <ScrollMotion animation="fade-up" delay={1.2}>
           <Contact />
