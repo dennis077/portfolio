@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import emailjs from '@emailjs/browser';
 import './contact.css';
@@ -64,7 +65,7 @@ const Contact = () => {
   };
 
   if (showThankYou) {
-    return (
+    return ReactDOM.createPortal(
       <div className="thank-you-container">
         <div className="thank-you-content">
           <div className="success-icon">
@@ -72,7 +73,7 @@ const Contact = () => {
           </div>
           <h2>Message Sent!</h2>
           <p>Thank you for reaching out. I'll get back to you soon.</p>
-          <button 
+          <button
             className="submit-button"
             onClick={() => setShowThankYou(false)}
           >
@@ -80,7 +81,8 @@ const Contact = () => {
             <span>Send Another Message</span>
           </button>
         </div>
-      </div>
+      </div>,
+      document.body
     );
   }
 
@@ -89,12 +91,12 @@ const Contact = () => {
       <div className="container">
         <h2 className="section-title">Get In Touch</h2>
         <p className="section-subtitle">Have a question or want to work together? Feel free to reach out!</p>
-        
+
         <div className="contact-content">
           <div className="contact-info">
             <h3>Contact Information</h3>
             <p>Feel free to reach out through any of these channels. I'll get back to you as soon as possible.</p>
-            
+
             <div className="contact-details">
               <div className="contact-item">
                 <div className="icon-wrapper">
@@ -102,39 +104,39 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4>Email</h4>
-                  <p>your.email@example.com</p>
+                  <p>dennis.tirkey@gmail.com</p>
                 </div>
               </div>
-              
+
               <div className="contact-item">
                 <div className="icon-wrapper">
                   <FaPhone className="icon" />
                 </div>
                 <div>
                   <h4>Phone</h4>
-                  <p>+1 (123) 456-7890</p>
+                  <p>+919373657604</p>
                 </div>
               </div>
-              
+
               <div className="contact-item">
                 <div className="icon-wrapper">
                   <FaMapMarkerAlt className="icon" />
                 </div>
                 <div>
                   <h4>Location</h4>
-                  <p>City, Country</p>
+                  <p>Pune, Maharashtra, India</p>
                 </div>
               </div>
             </div>
 
             <div className="social-links">
-              <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="social-link">
+              <a href="https://github.com/dennis-tirkey" target="_blank" rel="noopener noreferrer" className="social-link">
                 <FaGithub />
               </a>
-              <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" className="social-link">
+              <a href="https://linkedin.com/in/dennis-tirkey" target="_blank" rel="noopener noreferrer" className="social-link">
                 <FaLinkedin />
               </a>
-              <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" className="social-link">
+              <a href="https://twitter.com/dennis_tirkey" target="_blank" rel="noopener noreferrer" className="social-link">
                 <FaTwitter />
               </a>
             </div>
@@ -153,7 +155,7 @@ const Contact = () => {
                   required
                 />
               </div>
-              
+
               <div className="form-group">
                 <input
                   type="email"
@@ -164,7 +166,7 @@ const Contact = () => {
                   required
                 />
               </div>
-              
+
               <div className="form-group">
                 <input
                   type="text"
@@ -175,7 +177,7 @@ const Contact = () => {
                   required
                 />
               </div>
-              
+
               <div className="form-group">
                 <textarea
                   name="message"
@@ -185,9 +187,9 @@ const Contact = () => {
                   required
                 />
               </div>
-              
-              <button 
-                type="submit" 
+
+              <button
+                type="submit"
                 className="submit-button"
                 disabled={isSubmitting}
               >
