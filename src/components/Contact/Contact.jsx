@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane, FaGithub, FaLinkedin, FaTwitter, FaTimes } from 'react-icons/fa';
 import emailjs from '@emailjs/browser';
 import './contact.css';
 
@@ -68,6 +68,13 @@ const Contact = () => {
     return ReactDOM.createPortal(
       <div className="thank-you-container">
         <div className="thank-you-content">
+          <button
+            className="close-modal-btn"
+            onClick={() => setShowThankYou(false)}
+            aria-label="Close modal"
+          >
+            <FaTimes />
+          </button>
           <div className="success-icon">
             <FaPaperPlane />
           </div>
