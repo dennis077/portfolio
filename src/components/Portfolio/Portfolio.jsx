@@ -1,8 +1,9 @@
-import React, { useState, useRef, useMemo } from 'react';
+import React, { useState, useRef, useMemo, memo } from 'react';
 import './portfolio.css';
 import ProjectModal from './ProjectModal';
 import project1Image from './project1.png';
 import { BsSearch, BsGrid3X3Gap, BsList, BsX } from 'react-icons/bs';
+import { useRAFThrottle } from '../../hooks/useThrottle';
 
 const projects = [
   {
@@ -195,36 +196,39 @@ function Portfolio() {
   const filteredProjects = useMemo(() => {
     return projects.filter(project => {
       const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                           project.description.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesFilter = activeFilter === 'All' || 
-                           project.technologies.includes(activeFilter);
+        project.description.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesFilter = activeFilter === 'All' ||
+        project.technologies.includes(activeFilter);
       return matchesSearch && matchesFilter;
     });
   }, [searchQuery, activeFilter]);
 
-  const handleMouseMove = (e, projectId) => {
+  const handleMouseMoveRaw = (e, projectId) => {
     const card = cardRefs.current[projectId];
     if (!card) return;
-    
+
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-    
+
     // Calculate rotation with smoother, more subtle effect
-    const rotateX = ((y - centerY) / centerY) * -8; // Max 8 degrees
-    const rotateY = ((x - centerX) / centerX) * 8; // Max 8 degrees
-    
+    const rotateX = ((y - centerY) / centerY) * -5; // Reduced from 8
+    const rotateY = ((x - centerX) / centerX) * 5; // Reduced from 8
+
     // Calculate scale and translateZ for depth
     const distanceX = Math.abs(x - centerX) / centerX;
     const distanceY = Math.abs(y - centerY) / centerY;
     const distance = Math.max(distanceX, distanceY);
-    const translateZ = 30 + (distance * 20); // 30-50px depth
-    const scale = 1 + (distance * 0.02); // 1.0-1.02 scale
-    
+    const translateZ = 20 + (distance * 15); // Reduced from 30-50
+    const scale = 1 + (distance * 0.01); // Reduced from 0.02
+
     card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`;
   };
+
+  // Throttle with RAF for 60fps performance
+  const handleMouseMove = useRAFThrottle(handleMouseMoveRaw);
 
   const handleMouseLeave = (projectId) => {
     const card = cardRefs.current[projectId];
@@ -244,7 +248,7 @@ function Portfolio() {
   return (
     <section id="portfolio" className="portfolio-section">
       <h2 className="section-title">My Projects</h2>
-      
+
       {/* Search and Filter Controls */}
       <div className="portfolio-controls">
         <div className="search-container">
@@ -257,7 +261,7 @@ function Portfolio() {
             className="search-input"
           />
           {searchQuery && (
-            <button 
+            <button
               className="clear-search"
               onClick={() => setSearchQuery('')}
               aria-label="Clear search"
@@ -322,62 +326,62 @@ function Portfolio() {
         {filteredProjects.length > 0 ? (
           <div className={`projects-3d-grid ${viewMode === 'compact' ? 'compact-view' : ''}`}>
             {filteredProjects.map((project, index) => (
-            <div
-              key={project.id}
-              ref={(el) => (cardRefs.current[project.id] = el)}
-              className="project-card-3d"
-              style={{ '--index': index }}
-              onMouseMove={(e) => handleMouseMove(e, project.id)}
-              onMouseLeave={() => handleMouseLeave(project.id)}
-              onClick={() => openModal(project)}
-            >
-              <div className="card-3d-inner">
-                <div className="card-3d-front">
-                  <div className="project-image-3d">
-                    <img src={project.images[0]} alt={project.title} />
-                    <div className="image-overlay"></div>
-                  </div>
-                  <div className="project-content-3d">
-                    <h3>{project.title}</h3>
-                    <p>{project.description.substring(0, 100)}...</p>
-                    <div className="technologies-3d">
-                      {project.technologies.slice(0, 3).map((tech, techIndex) => (
-                        <span key={techIndex} className="tech-tag-3d">{tech}</span>
-                      ))}
-                      {project.technologies.length > 3 && (
-                        <span className="tech-tag-3d">+{project.technologies.length - 3}</span>
-                      )}
+              <div
+                key={project.id}
+                ref={(el) => (cardRefs.current[project.id] = el)}
+                className="project-card-3d"
+                style={{ '--index': index }}
+                onMouseMove={(e) => handleMouseMove(e, project.id)}
+                onMouseLeave={() => handleMouseLeave(project.id)}
+                onClick={() => openModal(project)}
+              >
+                <div className="card-3d-inner">
+                  <div className="card-3d-front">
+                    <div className="project-image-3d">
+                      <img src={project.images[0]} alt={project.title} />
+                      <div className="image-overlay"></div>
+                    </div>
+                    <div className="project-content-3d">
+                      <h3>{project.title}</h3>
+                      <p>{project.description.substring(0, 100)}...</p>
+                      <div className="technologies-3d">
+                        {project.technologies.slice(0, 3).map((tech, techIndex) => (
+                          <span key={techIndex} className="tech-tag-3d">{tech}</span>
+                        ))}
+                        {project.technologies.length > 3 && (
+                          <span className="tech-tag-3d">+{project.technologies.length - 3}</span>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="card-3d-back">
-                  <div className="card-back-content">
-                    <h3>{project.title}</h3>
-                    <p className="back-description">{project.description}</p>
-                    <div className="all-technologies">
-                      {project.technologies.map((tech, techIndex) => (
-                        <span key={techIndex} className="tech-tag-3d">{tech}</span>
-                      ))}
+                  <div className="card-3d-back">
+                    <div className="card-back-content">
+                      <h3>{project.title}</h3>
+                      <p className="back-description">{project.description}</p>
+                      <div className="all-technologies">
+                        {project.technologies.map((tech, techIndex) => (
+                          <span key={techIndex} className="tech-tag-3d">{tech}</span>
+                        ))}
+                      </div>
+                      <button
+                        className="view-project-btn"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          openModal(project);
+                        }}
+                      >
+                        View Details
+                      </button>
                     </div>
-                    <button 
-                      className="view-project-btn"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        openModal(project);
-                      }}
-                    >
-                      View Details
-                    </button>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
           </div>
         ) : (
           <div className="no-results">
             <p>No projects found matching your search criteria.</p>
-            <button 
+            <button
               className="clear-filters-btn"
               onClick={() => {
                 setSearchQuery('');
@@ -391,9 +395,9 @@ function Portfolio() {
       </div>
 
       {selectedProject && (
-        <ProjectModal 
-          project={selectedProject} 
-          onClose={closeModal} 
+        <ProjectModal
+          project={selectedProject}
+          onClose={closeModal}
         />
       )}
     </section>

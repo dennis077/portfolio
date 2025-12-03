@@ -1,26 +1,30 @@
+import { lazy, Suspense } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Nav from './components/Nav/Nav'
 import Header from './components/Header/Header'
 import About from './components/About/About'
-import Experience from './components/Experience/Experience'
-import Portfolio from './components/Portfolio/Portfolio'
-import Skills from './components/Skills/Skills'
-import Services from './components/Services/Services'
-import Achievements from './components/Achievemets/Achievemets'
-import Contact from './components/Contact/Contact'
 import Decorations from './components/Decorations/Decorations'
 import ScrollMotion from './components/ScrollMotion/ScrollMotion'
+
+// Lazy load heavy components
+const Experience = lazy(() => import('./components/Experience/Experience'));
+const Portfolio = lazy(() => import('./components/Portfolio/Portfolio'));
+const Skills = lazy(() => import('./components/Skills/Skills'));
+const Services = lazy(() => import('./components/Services/Services'));
+const Achievements = lazy(() => import('./components/Achievemets/Achievemets'));
+const Contact = lazy(() => import('./components/Contact/Contact'));
 
 function App() {
   return (
     <div className="App">
-        <Decorations />
-        <Header />
-        <Nav />
-        <ScrollMotion animation="fade-up">
-          <About />
-        </ScrollMotion>
+      <Decorations />
+      <Header />
+      <Nav />
+      <ScrollMotion animation="fade-up">
+        <About />
+      </ScrollMotion>
+      <Suspense fallback={<div style={{ minHeight: '50vh' }}></div>}>
         <ScrollMotion animation="fade-up" delay={0.2}>
           <Experience />
         </ScrollMotion>
@@ -39,6 +43,7 @@ function App() {
         <ScrollMotion animation="fade-up" delay={1.2}>
           <Contact />
         </ScrollMotion>
+      </Suspense>
     </div>
   );
 }

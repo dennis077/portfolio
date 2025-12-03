@@ -1,73 +1,58 @@
-import React from 'react';
+import React, { memo } from 'react';
 import './decorations.css';
-import { FaCode, FaServer, FaDatabase, FaRobot, FaLaptopCode, FaPalette, FaLightbulb, FaRocket } from 'react-icons/fa';
-import { GiArtificialIntelligence, GiCpu, GiNetworkBars, GiAbstract024 } from 'react-icons/gi';
-import { BsGear, BsCpu, BsLightning, BsStars } from 'react-icons/bs';
+import { FaCode, FaDatabase, FaRocket, FaPalette } from 'react-icons/fa';
+import { GiArtificialIntelligence, GiNetworkBars } from 'react-icons/gi';
+import { BsGear, BsLightning } from 'react-icons/bs';
+import { useIsMobile, useReducedMotion } from '../../hooks/useReducedMotion';
 
-const Decorations = () => {
+const Decorations = memo(() => {
+  const isMobile = useIsMobile();
+  const prefersReducedMotion = useReducedMotion();
+
+  // Disable decorations on mobile or for users who prefer reduced motion
+  if (isMobile || prefersReducedMotion) {
+    return null;
+  }
+
   return (
     <>
-      {/* Floating Icons */}
+      {/* Reduced Floating Icons - 4 instead of 8 */}
       <div className="floating-icon icon-1">
         <FaCode />
-      </div>
-      <div className="floating-icon icon-2">
-        <FaServer />
       </div>
       <div className="floating-icon icon-3">
         <FaDatabase />
       </div>
-      <div className="floating-icon icon-4">
-        <FaRobot />
-      </div>
       <div className="floating-icon icon-5">
-        <FaLaptopCode />
-      </div>
-      <div className="floating-icon icon-6">
         <FaPalette />
-      </div>
-      <div className="floating-icon icon-7">
-        <FaLightbulb />
       </div>
       <div className="floating-icon icon-8">
         <FaRocket />
       </div>
 
-      {/* Abstract Shapes */}
+      {/* Reduced Abstract Shapes - 2 instead of 4 */}
       <div className="abstract-shape shape-1">
-        <GiAbstract024 />
-      </div>
-      <div className="abstract-shape shape-2">
-        <GiCpu />
-      </div>
-      <div className="abstract-shape shape-3">
         <GiNetworkBars />
       </div>
-      <div className="abstract-shape shape-4">
+      <div className="abstract-shape shape-3">
         <GiArtificialIntelligence />
       </div>
 
-      {/* Tech Elements */}
+      {/* Reduced Tech Elements - 2 instead of 4 */}
       <div className="tech-element tech-1">
         <BsGear />
-      </div>
-      <div className="tech-element tech-2">
-        <BsCpu />
       </div>
       <div className="tech-element tech-3">
         <BsLightning />
       </div>
-      <div className="tech-element tech-4">
-        <BsStars />
-      </div>
 
-      {/* Gradient Orbs */}
+      {/* Reduced Gradient Orbs - 2 instead of 4 */}
       <div className="gradient-orb orb-1"></div>
-      <div className="gradient-orb orb-2"></div>
       <div className="gradient-orb orb-3"></div>
-      <div className="gradient-orb orb-4"></div>
     </>
   );
-};
+});
 
-export default Decorations; 
+Decorations.displayName = 'Decorations';
+
+export default Decorations;

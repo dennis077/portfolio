@@ -8,9 +8,8 @@ const ScrollMotion = memo(({ children, animation = 'fade-up', delay = 0 }) => {
   const observerCallback = useCallback((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.classList.add('animate');
-        }, 100);
+        // Immediately add animate class without setTimeout delay
+        entry.target.classList.add('animate');
         observerRef.current?.unobserve(entry.target);
       }
     });
@@ -18,8 +17,8 @@ const ScrollMotion = memo(({ children, animation = 'fade-up', delay = 0 }) => {
 
   useEffect(() => {
     const options = {
-      threshold: 0.1,
-      rootMargin: '50px 0px'
+      threshold: 0.15, // Slightly higher threshold
+      rootMargin: '0px 0px -50px 0px' // Trigger earlier for smoother experience
     };
 
     observerRef.current = new IntersectionObserver(observerCallback, options);
@@ -37,10 +36,10 @@ const ScrollMotion = memo(({ children, animation = 'fade-up', delay = 0 }) => {
   }, [observerCallback]);
 
   return (
-    <div 
-      ref={elementRef} 
+    <div
+      ref={elementRef}
       className={`scroll-motion ${animation}`}
-      style={{ 
+      style={{
         animationDelay: `${delay}s`,
         willChange: 'transform, opacity'
       }}
