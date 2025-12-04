@@ -7,6 +7,7 @@ import dhiNutriImage from './dhinutri.png';
 import myportfolioImage from './myportfolio.png';
 import shaktifyImage from './shaktify.png';
 import whatsLiveImage from './whatslive.png';
+import prototechImage from './prototech.png';
 // import namoNaicoImage from './namonaico.png';
 // import goDaddyImage from './godaddy.png';
 // import newfoldImage from './newfold.png';
@@ -21,7 +22,7 @@ const projects = [
     description: 'Main website for ProtoTech Solutions designed and developed in WordPress. Features custom themes, responsive design, and seamless user experience with HTML, CSS, PHP, and MySQL integration.',
     technologies: ['WordPress', 'HTML5', 'CSS3', 'PHP', 'MySQL', 'JavaScript'],
     images: [
-      project1Image,
+      prototechImage,
       'https://via.placeholder.com/800x450',
       'https://via.placeholder.com/800x450'
     ],
